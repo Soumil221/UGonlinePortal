@@ -7,7 +7,10 @@ const Register = () => {
     name: '',
     email: '',
     rollno: '',
-    password: ''
+    department: '',
+    semester: '',
+    password: '',
+    confirm: '',
   });
   const navigate = useNavigate();
 
@@ -28,12 +31,17 @@ const Register = () => {
       alert("Invalid Email, Please enter the college domain id")
       window.location.reload();
     } 
+    if(formData.password!=formData.confirm) {
+      alert("Invalid Credintials entered");
+    }
 
     try {
       await axios.post(``, {
         name: formData.name,
         email: formData.email,
         rollno: formData.rollno,
+        department: formData.department,
+        semester: formData.semester,
         password: formData.password,
       });
       alert('Registration successful');
@@ -42,6 +50,14 @@ const Register = () => {
       alert('Registration failed: ' + (error.response?.data?.message || error.message));
     }
   };
+
+
+  const inputFields = [
+    { name: 'name', type: 'text', placeholder: 'Name' },
+    { name: 'email', type: 'text', placeholder: 'Email' },
+    { name: 'rollno', type: 'text', placeholder: 'Roll Number' },
+    { name: 'department', type: 'text', placeholder: 'Department' },
+  ];
 
   return (
     <div className="min-h-screen bg-[#E8F1FA] text-gray-900 flex justify-center">
@@ -52,38 +68,49 @@ const Register = () => {
             <div className="w-full flex-1 mt-8">
               <div className="mx-auto max-w-xs">
                 <form onSubmit={handleSubmit} className="flex flex-col">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    value={formData.name}
+                {inputFields.map((field) => (
+                    <input
+                      key={field.name}
+                      type={field.type}
+                      name={field.name}
+                      placeholder={field.placeholder}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      className="w-full px-8 py-4 rounded-lg font-medium bg-[#F0F8FF] border border-[#A0C4E2] placeholder-gray-500 text-sm focus:outline-none focus:border-[#3D8BCA] focus:bg-white mt-5"
+                      required
+                    />
+                  ))}
+                 <select
+                    name="semester"
+                    value={formData.semester}
                     onChange={handleChange}
-                    className="w-full px-8 py-4 rounded-lg font-medium bg-[#F0F8FF] border border-[#A0C4E2] placeholder-gray-500 text-sm focus:outline-none focus:border-[#3D8BCA] focus:bg-white"
+                    className="w-full px-8 py-4 rounded-lg font-medium bg-[#F0F8FF] border border-[#A0C4E2] text-gray-500 text-sm focus:outline-none focus:border-[#3D8BCA] focus:bg-white mt-5"
                     required
-                  />
+                  >
+                    <option value="" disabled>Select Semester</option>
+                    <option value="1st">1st</option>
+                    <option value="2nd">2nd</option>
+                    <option value="3rd">3rd</option>
+                    <option value="4th">4th</option>
+                    <option value="5th">5th</option>
+                    <option value="6th">6th</option>
+                    <option value="7th">7th</option>
+                    <option value="8th">8th</option>
+                  </select>
                   <input
-                    type="text"
-                    name="email"
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-8 py-4 rounded-lg font-medium bg-[#F0F8FF] border border-[#A0C4E2] placeholder-gray-500 text-sm focus:outline-none focus:border-[#3D8BCA] focus:bg-white mt-5"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="rollno"
-                    placeholder="Roll Number"
-                    value={formData.rollno}
+                    type="password"
+                    name="password"
+                    placeholder="Set Password"
+                    value={formData.password}
                     onChange={handleChange}
                     className="w-full px-8 py-4 rounded-lg font-medium bg-[#F0F8FF] border border-[#A0C4E2] placeholder-gray-500 text-sm focus:outline-none focus:border-[#3D8BCA] focus:bg-white mt-5"
                     required
                   />
                   <input
                     type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={formData.password}
+                    name="condirm"
+                    placeholder="Confirm Password"
+                    value={formData.confirm}
                     onChange={handleChange}
                     className="w-full px-8 py-4 rounded-lg font-medium bg-[#F0F8FF] border border-[#A0C4E2] placeholder-gray-500 text-sm focus:outline-none focus:border-[#3D8BCA] focus:bg-white mt-5"
                     required
