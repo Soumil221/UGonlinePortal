@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import emailjs from "@emailjs/browser";
+import emailjs from "emailjs";
 
 emailjs.init("u8QLKD8IPFnergZTP"); // Replace with your public key
 
