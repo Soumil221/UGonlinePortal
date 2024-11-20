@@ -4,7 +4,7 @@ const validator = require('validator');
 
 const studentSchema = new mongoose.Schema({
   rollNumber: { 
-    type: String, 
+    type: Number, 
     required: true, 
     unique: true,
     trim: true,
@@ -41,19 +41,25 @@ const studentSchema = new mongoose.Schema({
     min: [0, 'Attendance cannot be negative'],
     max: [100, 'Attendance cannot exceed 100%']
   },
+  sem: { 
+    type: Number, 
+    required: true, 
+    unique: true,
+    trim: true,
+  },
   branch: { 
     type: String, 
     required: true,
     trim: true,
     uppercase: true
   },
-  section: { 
+  dept: { 
     type: String, 
     required: true,
     trim: true,
     uppercase: true
   },
-  cgpa: { 
+  CG: { 
     type: Number, 
     default: 0,
     min: [0, 'CGPA cannot be negative'],
@@ -63,6 +69,11 @@ const studentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Subject' 
   }],
+  choices: [{ 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Subject' 
+  }],
+
 });
 
 // Pre-save hook to hash password
