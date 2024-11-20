@@ -9,7 +9,7 @@ import Landing from "./pages/Landing";
 import OpenElective from "./pages/OpenElective";
 import OtpVerification from "./pages/OtpVerification.jsx";
 import Studenttable from "./pages/Studenttable.jsx";
-import Subjecticon from './pages/subjecticon.jsx';
+import Subjecticon from './pages/Subjecticon.jsx';
 
 function App() {
   const [activeSubject, setActiveSubject] = useState(null); // Track the selected subject
