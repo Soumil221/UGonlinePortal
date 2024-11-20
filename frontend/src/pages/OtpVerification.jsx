@@ -1,8 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import emailjs from "@emailjs/browser";
+import emailjs from "emailjs";
 
 emailjs.init("u8QLKD8IPFnergZTP"); // Replace with your public key
+
+import { TextEncoder, TextDecoder } from 'util';
+
+if (typeof globalThis.TextEncoder === 'undefined') {
+  globalThis.TextEncoder = TextEncoder;
+}
+
+if (typeof globalThis.TextDecoder === 'undefined') {
+  globalThis.TextDecoder = TextDecoder;
+}
+
 
 export default function OtpVerification() {
   const [email, setEmail] = useState("");
